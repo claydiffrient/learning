@@ -21,5 +21,19 @@ describe Inventory do
       expect(@inventory.products[0].quantity).to eq(2)
     end
   end
+
+  describe "#remove" do
+    it "should reduce the quantity by one of an item." do
+      @inventory.remove(@product)
+      expect(@inventory.products.count).to eq(1)
+      expect(@inventory.products[0].quantity).to eq(1)
+    end
+
+    it "should remove an item if the initial quantity is 0" do
+      @inventory.remove(@product)
+      @inventory.remove(@product)
+      expect(@inventory.products.count).to eq(0)
+    end
+  end
 end
 

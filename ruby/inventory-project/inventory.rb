@@ -16,6 +16,9 @@ class Inventory
     prod = @products[product.id]
     unless prod.nil?
       prod.quantity -= 1
+      if prod.quantity < 0
+        @products.delete(product.id)
+      end
     end
   end
 
