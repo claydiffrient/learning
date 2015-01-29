@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.3
+install:
+  - "gem install rspec"
+script:
+  - "sh ./runTests.sh"
