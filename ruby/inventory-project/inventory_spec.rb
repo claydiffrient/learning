@@ -15,7 +15,7 @@ describe Inventory do
       expect(@inventory.products[0].quantity).to eq(1)
     end
 
-    it "should increase the quanity if the item is already in the inventory" do
+    it "should increase the quantity if the item is already in the inventory" do
       @inventory.add(@product)
       expect(@inventory.products.count).to eq(1)
       expect(@inventory.products[0].quantity).to eq(2)
