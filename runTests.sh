@@ -4,3 +4,4 @@
 ###
 
 rspec ./ruby/inventory-project/*_spec.rb
+rspec ./ruby/company-manager/*_spec.rb

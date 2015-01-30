@@ -1,0 +1,3 @@
+class HourlyEmployee < Employee
+
+end
