@@ -35,5 +35,17 @@ describe Inventory do
       expect(@inventory.products.count).to eq(0)
     end
   end
+
+  describe "#value" do
+    it "should return the total value of all products in the inventory" do
+      a = Product.new 25
+      b = Product.new 5
+      c = Product.new 2, 3
+      @inventory.add a
+      @inventory.add b
+      @inventory.add c
+      expect(@inventory.value).to eq(36)
+    end
+  end
 end
 

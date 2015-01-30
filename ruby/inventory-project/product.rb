@@ -8,4 +8,8 @@ class Product
     @quantity = quantity
     @@object_count += 1
   end
+
+  def value
+    @price * @quantity
+  end
 end
