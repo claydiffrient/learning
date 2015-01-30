@@ -25,4 +25,8 @@ class Inventory
   def products
     @products
   end
+
+  def value
+    @products.values.map(&:value).reduce(:+)
+  end
 end
