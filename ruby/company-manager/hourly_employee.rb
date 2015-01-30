@@ -8,6 +8,9 @@ class HourlyEmployee < Employee
     super name
   end
 
+  def pay(hours)
+    hours * @payrate
+  end
 
 
 end
