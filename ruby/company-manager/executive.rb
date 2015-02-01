@@ -1,7 +1,7 @@
 class Executive < Employee
-  attr_accessor :payrate
+  attr_accessor :percentage
 
-  DEFAULT_PERCENTAGE  = .10
+  DEFAULT_PERCENTAGE  = 0.10
 
   def initialize(name, percentage = DEFAULT_PERCENTAGE)
     @percentage = percentage
@@ -11,6 +11,5 @@ class Executive < Employee
   def pay(profits)
     total_pay = profits * @percentage
   end
-
 
 end
