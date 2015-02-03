@@ -26,4 +26,11 @@ class Company
     employee_to_fire
   end
 
+  def give_raise(employee, percentage)
+    if employee.is_a? String
+      employee_to_raise = @employees.find { |e| e.name == employee }
+    end
+
+    employee_to_raise.give_raise(percentage)
+
 end

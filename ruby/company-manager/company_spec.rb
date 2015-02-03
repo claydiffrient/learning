@@ -70,4 +70,12 @@ describe "Company" do
       expect(@test_company.employees.count).to eq(2)
     end
   end
+
+  describe "#raise" do
+    it "should be able to increase the pay of a named employee by a given percentage" do
+      emp = @test_company.employees.find { |e| e.name == "ClayHourly" }
+      @test_company.give_raise("ClayHourly", 0.10)
+      expect(emp.payrate).to eq(7.98)
+    end
+  end
 end
