@@ -19,6 +19,11 @@
 
 
 require "codeclimate-test-reporter"
+CodeClimate::TestReporter.configure do |config|
+  config.path_prefix = "ruby"
+  config.git_dir = "../" #the relative or absolute location of your git root compared to where your tests are run
+end
+
 CodeClimate::TestReporter.start
 
 require 'require_all'
