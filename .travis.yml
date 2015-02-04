@@ -5,5 +5,9 @@ rvm:
   - 2.1.3
 install:
   - "gem install rspec"
+  - "gem install codeclimate-test-reporter"
 script:
   - "sh ./runTests.sh"
+addons:
+   code_climate:
+      repo_token: 0c5f40d542e87863cd64d9e3adcb34a801923367e018cf16d53537590e4d60b3

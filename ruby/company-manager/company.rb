@@ -32,5 +32,6 @@ class Company
     end
 
     employee_to_raise.give_raise(percentage)
+  end
 
 end

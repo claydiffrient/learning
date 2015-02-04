@@ -10,6 +10,7 @@ describe "Company" do
   before :all do
     @test_company = Company.new "Test Company"
     @manager = Manager.new "ClayManager"
+    @h_employee = HourlyEmployee.new "ClayHourly"
   end
 
   describe "#initialize" do
@@ -28,8 +29,7 @@ describe "Company" do
     end
 
     it "should be able to hire an hourly employee" do
-      h_employee = HourlyEmployee.new "ClayHourly"
-      num_employees = @test_company.hire(h_employee)
+      num_employees = @test_company.hire(@h_employee)
       expect(num_employees).to eq(2)
     end
 
@@ -73,6 +73,7 @@ describe "Company" do
 
   describe "#raise" do
     it "should be able to increase the pay of a named employee by a given percentage" do
+      @test_company.hire(@h_employee)
       emp = @test_company.employees.find { |e| e.name == "ClayHourly" }
       @test_company.give_raise("ClayHourly", 0.10)
       expect(emp.payrate).to eq(7.98)

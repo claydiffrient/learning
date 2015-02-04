@@ -12,5 +12,8 @@ class HourlyEmployee < Employee
     hours * @payrate
   end
 
-
+  def give_raise(percentage)
+    new_pay = @payrate + (@payrate * percentage)
+    @payrate = (new_pay * 100).round.to_f / 100
+  end
 end
