@@ -1,5 +1,3 @@
-require_relative './executive'
-
 describe "Executive" do
   describe "#initialize" do
     it "should instantiate properly" do

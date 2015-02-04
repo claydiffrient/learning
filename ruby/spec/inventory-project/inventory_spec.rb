@@ -1,6 +1,3 @@
-require_relative './inventory'
-require_relative './product'
-
 describe Inventory do
 
   before :all do

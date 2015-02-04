@@ -1,5 +1,3 @@
-require_relative './product'
-
 describe "Product" do
 
   describe "#initialize" do

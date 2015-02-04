@@ -1,5 +1,3 @@
-require_relative './employee'
-
 describe "Employee" do
   describe "#initialize" do
     it "should create an employee with a name" do

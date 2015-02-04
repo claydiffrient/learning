@@ -1,5 +1,3 @@
-require_relative './manager'
-
 describe "Manager" do
   describe "#initialize" do
     it "should instantiate properly" do

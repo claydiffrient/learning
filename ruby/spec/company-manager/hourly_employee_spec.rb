@@ -1,5 +1,3 @@
-require_relative './hourly_employee'
-
 describe "HourlyEmployee" do
   describe "#initialize" do
     it "should instantiate properly" do

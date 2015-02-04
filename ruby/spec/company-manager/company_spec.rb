@@ -1,10 +1,3 @@
-require_relative './company'
-require_relative './employee'
-require_relative './hourly_employee'
-require_relative './salaried_employee'
-require_relative './manager'
-require_relative './executive'
-
 describe "Company" do
 
   before :all do

@@ -6,6 +6,7 @@ rvm:
 install:
   - "gem install rspec"
   - "gem install codeclimate-test-reporter"
+  - "gem install require_all"
 script:
   - "sh ./runTests.sh"
 addons:
