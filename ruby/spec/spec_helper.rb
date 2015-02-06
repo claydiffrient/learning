@@ -30,6 +30,7 @@ require 'require_all'
 
 require_rel '../company-manager'
 require_rel '../inventory-project'
+require_rel '../fizzbuzz'
 
 
 RSpec.configure do |config|
