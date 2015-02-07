@@ -31,6 +31,7 @@ require 'require_all'
 require_rel '../company-manager'
 require_rel '../inventory-project'
 require_rel '../fizzbuzz'
+require_rel '../recipe-manager'
 
 
 RSpec.configure do |config|
