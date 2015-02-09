@@ -24,4 +24,30 @@ describe RecipeManager do
     end
   end
 
+  describe "#add_recipe" do
+    before :each do
+      @test = RecipeManager.new
+    end
+
+    it "should add a recipe to the manager" do
+      r = Recipe.new "Creole Chicken"
+      @test.add_recipe(r)
+      expect(@test.recipes.count).to eq(1)
+      expect(@test.recipes["Uncategorized"].count).to eq(1)
+    end
+
+    it "should add a recipe with a category to the manager" do
+      @test.add_category("Dessert")
+      r = Recipe.new "Hot Chocolate"
+      @test.add_recipe(r, "Dessert")
+      expect(@test.recipes["Dessert"].count).to eq(1)
+    end
+
+    it "should throw an error if a category hasn't been added yet" do
+      r = Recipe.new "Bourbon Chicken"
+      expect { @test.add_recipe(r, "Dinners") }.to raise_error(RuntimeError)
+    end
+  end
+
+
 end
