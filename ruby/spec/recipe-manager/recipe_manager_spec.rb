@@ -49,5 +49,25 @@ describe RecipeManager do
     end
   end
 
+  describe "#get_recipe_by_category" do
+    before :each do
+      @test = RecipeManager.new
+      @test.add_category("Dinners")
+      @test.add_category("Breakfasts")
+      @test.add_recipe(Recipe.new("Bourbon Chicken"), "Dinners")
+      @test.add_recipe(Recipe.new("Steak Toscano"), "Dinners")
+      @test.add_recipe(Recipe.new("Pain Perdu"), "Breakfasts")
+    end
+
+    it "should get a list of all recipes in the given category" do
+      items = @test.get_recipe_by_category("Dinners")
+      expect(items.count).to eq(2)
+      item_names = items.map { |e| e.name }
+      expect(item_names).to eq(["Bourbon Chicken", "Steak Toscano"])
+    end
+  end
+
+
+
 
 end

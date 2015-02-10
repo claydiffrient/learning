@@ -20,4 +20,8 @@ class RecipeManager
     @recipes[category] << recipe
   end
 
+  def get_recipe_by_category(category)
+    @recipes[category]
+  end
+
 end
