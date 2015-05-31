@@ -8,7 +8,7 @@ class ChangeReturn
     total_amount = prompt('Total Cost: ').to_f
     money_given = prompt('Total Given: ').to_f
 
-    to_return = (money_given - total_amount)
+    to_return = convert_to_cents(money_given - total_amount)
     print build_change_string(to_return)
   end
 
@@ -17,7 +17,7 @@ class ChangeReturn
   end
 
   def build_change_string(amount)
-    ret_val = 'Change returned is:'
+    ret_val = 'Change returned is: '
     value = {
       dollars: 0,
       quarters: 0,
