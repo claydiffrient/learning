@@ -4,6 +4,15 @@ class ChangeReturn
     gets
   end
 
+  def pluralize(amount, text)
+    if amount > 1
+      return "#{text}s" unless text == 'penny'
+      'pennies'
+    else
+      text
+    end
+  end
+
   def run
     total_amount = prompt('Total Cost: ').to_f
     money_given = prompt('Total Given: ').to_f
@@ -45,19 +54,24 @@ class ChangeReturn
     end
 
     if value[:dollars] > 0
-      ret_val += "#{value[:dollars]} dollars,"
+      word = pluralize(value[:dollars], 'dollar')
+      ret_val += "#{value[:dollars]} #{word}, "
     end
     if value[:quarters] > 0
-      ret_val += "#{value[:quarters]} quarters,"
+      word = pluralize(value[:quarters], 'quarter')
+      ret_val += "#{value[:quarters]} #{word}, "
     end
     if value[:dimes] > 0
-      ret_val += "#{value[:dimes]} dimes,"
+      word = pluralize(value[:dimes], 'dime')
+      ret_val += "#{value[:dimes]} #{word}, "
     end
     if value[:nickels] > 0
-      ret_val += "#{value[:nickels]} nickels,"
+      word = pluralize(value[:nickels], 'nickel')
+      ret_val += "#{value[:nickels]} #{word}, "
     end
     if value[:pennies] > 0
-      ret_val += "#{value[:pennies]} pennies."
+      word = pluralize(value[:pennies], 'penny')
+      ret_val += "#{value[:pennies]} #{word}."
     end
 
     ret_val
