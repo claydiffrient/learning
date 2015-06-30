@@ -4,28 +4,18 @@ defmodule Vowels do
   def count(string) do
     list = String.to_char_list(string)
 
-    Enum.reduce(list, fn(x, acc) ->
-      if is_vowel(x) do
-        acc + 1
-      end
-    end
-    )
-
-  end
-
-  def from_code_point(<< code_point :: size(32) >>) do
-    "x{#{code_point}}"
+    Enum.count(list, fn(x) ->
+      is_vowel(x)
+    end)
   end
 
   defp is_vowel(char) do
-
-    IEx.pry
     cond do
-      char == 'a' -> true
-      char == 'e' -> true
-      char == 'i' -> true
-      char == 'o' -> true
-      char == 'u' -> true
+      char == 97 -> true  # a
+      char == 101 -> true # e
+      char == 105 -> true # i
+      char == 111 -> true # o
+      char == 117 -> true # u
       true -> false
     end
   end
