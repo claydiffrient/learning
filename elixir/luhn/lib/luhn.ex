@@ -1,9 +1,10 @@
 require IEx
 defmodule Luhn do
   def verify(value) do
-    # reversed = String.reverse(value)
-    # IO.puts reversed
-    IO.puts findDoubleSum(value, String.length(value) - 1, 0)
+    double_sum = findDoubleSum(value, String.length(value), 0)
+    checksum = multiplyAndModulo(double_sum)
+    last_digit = elem(Integer.parse(String.last(value)), 0)
+    checksum == last_digit
   end
 
   def findDoubleSum(str, pos, sum) when pos > 0 do
@@ -35,6 +36,10 @@ defmodule Luhn do
 
   def findDoubleSum(_str, _pos, sum) do
     sum
+  end
+
+  def multiplyAndModulo(value) do
+    rem value * 9, 10
   end
 
 end
