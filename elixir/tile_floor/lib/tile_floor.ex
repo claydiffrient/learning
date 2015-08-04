@@ -23,11 +23,11 @@ defmodule TileFloor do
       [length | tail] = values
       [width | tail2] = tail
       [cost | _] = tail2
-      IO.puts "$#{total_cost(
+      IO.puts String.ljust("$#{total_cost(
         length: Integer.parse(length),
         width: Integer.parse(width),
         cost: Float.parse(cost)
-      )}"
+      )}", 5, ?0)
     end
   end
 
