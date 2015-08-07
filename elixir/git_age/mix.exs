@@ -28,6 +28,9 @@ defmodule GitAge.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:mix_test_watch, "~> 0.1.1", only: :dev}]
+    [
+      {:mix_test_watch, "~> 0.1.1", only: :dev},
+      {:timex, "~> 0.17.0"}
+    ]
   end
 end

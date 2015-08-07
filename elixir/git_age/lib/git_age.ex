@@ -36,7 +36,12 @@ defmodule GitAge do
       into: files
     )
     Enum.each(elem(results, 0), fn(x) ->
-      IO.puts x
+      Enum.each(String.split(x, "\n"), fn(line) ->
+        IO.puts Enum.at(String.split(line), 3)
+      end)
+
+
+      # IO.puts(x |> Timex.DateFormat.parse("{ISO}"))
     end)
   end
 
