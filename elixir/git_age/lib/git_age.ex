@@ -18,31 +18,35 @@ defmodule GitAge do
     File.cd!(path, fn(
       ) ->
       response = File.ls!(path)
+      counts = HashDict.new()
+      Dict.put(counts, "count", 0)
       Enum.each(response, fn(x) ->
         IO.puts "Processing #{x}"
         if (File.dir?(x)) do
           #open_directory(x)
           IO.puts "--Directory"
         else
-          git_blame(x)
+          git_blame(x, counts);
         end
       end)
     end)
   end
 
-  defp git_blame(file) do
+  defp git_blame(file, count_hash) do
     files = []
     results = System.cmd("git", ["blame", file],
       into: files
     )
     Enum.each(elem(results, 0), fn(x) ->
       Enum.each(String.split(x, "\n"), fn(line) ->
-        IO.puts Enum.at(String.split(line), 3)
+        date = Enum.at(String.split(line), 3)
+        Dict.update(count_hash, date, 0, fn (val) -> val + 1 end)
       end)
 
 
       # IO.puts(x |> Timex.DateFormat.parse("{ISO}"))
     end)
+    IO.inspect count_hash
   end
 
 
