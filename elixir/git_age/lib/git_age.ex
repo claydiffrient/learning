@@ -37,8 +37,12 @@ defmodule GitAge do
     results = System.cmd("git", ["blame", file],
       into: files
     )
+    handle_results(results, 0, count_hash)
+    # Loops through each of the results
     Enum.each(elem(results, 0), fn(x) ->
+      # Loops through each of the lines of the result
       Enum.each(String.split(x, "\n"), fn(line) ->
+        # Pulls the date from the line.
         date = Enum.at(String.split(line), 3)
         Dict.update(count_hash, date, 0, fn (val) -> val + 1 end)
       end)
@@ -47,6 +51,13 @@ defmodule GitAge do
       # IO.puts(x |> Timex.DateFormat.parse("{ISO}"))
     end)
     IO.inspect count_hash
+  end
+
+  defp handle_results(results, index, dict) do
+    if (index == Enum.count(results) - 1) do
+      dict
+    end
+    Enum.at(results, index)
   end
 
 
