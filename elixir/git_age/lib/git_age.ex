@@ -34,30 +34,30 @@ defmodule GitAge do
 
   defp git_blame(file, count_hash) do
     files = []
+    updated_count_hash = []
     results = System.cmd("git", ["blame", file],
       into: files
     )
-    handle_results(results, 0, count_hash)
+
     # Loops through each of the results
     Enum.each(elem(results, 0), fn(x) ->
-      # Loops through each of the lines of the result
-      Enum.each(String.split(x, "\n"), fn(line) ->
-        # Pulls the date from the line.
-        date = Enum.at(String.split(line), 3)
-        Dict.update(count_hash, date, 0, fn (val) -> val + 1 end)
-      end)
-
-
-      # IO.puts(x |> Timex.DateFormat.parse("{ISO}"))
+      # Break the result into lines
+      lines = String.split(x, "\n")
+      updated_count_hash = handle_blame_lines(lines, 0, count_hash)
+      IO.inspect updated_count_hash
     end)
-    IO.inspect count_hash
+    IO.inspect updated_count_hash
   end
 
-  defp handle_results(results, index, dict) do
-    if (index == Enum.count(results) - 1) do
+  defp handle_blame_lines(lines, index, dict) do
+    if (index == Enum.count(lines) - 1) do
       dict
+    else
+      line = Enum.at(lines, index)
+      date = Enum.at(String.split(line), 3)
+      updated_dict = Dict.update(dict, date, 0, fn (val) -> val + 1 end)
+      handle_blame_lines(lines, index + 1, updated_dict)
     end
-    Enum.at(results, index)
   end
 
 
