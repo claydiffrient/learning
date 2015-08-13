@@ -45,26 +45,16 @@ defmodule GitAge do
     File.cd!(path)
     # Get all the files at that path
     response = File.ls!(path)
-    Enum.map(response, fn(x) ->
+    List.flatten(Enum.map(response, fn(x) ->
       full_path = path <> "/" <> x
-      if (File.dir?(full_path)) do
+      # TODO: Figure out some way to handle git ignore stuff
+      if (File.dir?(full_path) && x != ".git") do
         open_directory(full_path, files)
       else
         full_path
       end
-    end)
+    end))
   end
-  #     Enum.each(response, fn(x) ->
-  #       full_path = path <> "/" <> x
-  #       if (File.dir?(full_path)) do
-  #         open_directory(full_path, files)
-  #       else
-  #         files = List.insert_at(files, -1, full_path)
-
-  #       end
-  #     end)
-  #   end)
-  # end
 
   defp git_blame(file, count_hash) do
     files = []
