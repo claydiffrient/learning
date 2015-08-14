@@ -23,7 +23,7 @@ defmodule GitAge do
       IO.puts "git_age git_repo_path"
     else
       [head | tail] = elem(options, 1)
-      IO.inspect open_directory(head)
+      open_directory(head) |> git_blame
     end
   end
 
@@ -56,33 +56,43 @@ defmodule GitAge do
     end))
   end
 
-  defp git_blame(file, count_hash) do
+  def git_blame(file_list) do
     files = []
-    updated_count_hash = []
-    results = System.cmd("git", ["blame", file],
-      into: files
-    )
-
-    # Loops through each of the results
-    Enum.each(elem(results, 0), fn(x) ->
-      # Break the result into lines
-      lines = String.split(x, "\n")
-      updated_count_hash = handle_blame_lines(lines, 0, count_hash)
-      IO.inspect updated_count_hash
+    Enum.map(file_list, fn(x) ->
+      System.cmd("git", ["blame", x],
+        into: files
+      )
     end)
-    IO.inspect updated_count_hash
   end
 
-  defp handle_blame_lines(lines, index, dict) do
-    if (index == Enum.count(lines) - 1) do
-      dict
-    else
-      line = Enum.at(lines, index)
-      date = Enum.at(String.split(line), 3)
-      updated_dict = Dict.update(dict, date, 0, fn (val) -> val + 1 end)
-      handle_blame_lines(lines, index + 1, updated_dict)
-    end
-  end
+
+  # defp git_blame(file, count_hash) do
+  #   files = []
+  #   updated_count_hash = []
+  #   results = System.cmd("git", ["blame", file],
+  #     into: files
+  #   )
+
+  #   # Loops through each of the results
+  #   Enum.each(elem(results, 0), fn(x) ->
+  #     # Break the result into lines
+  #     lines = String.split(x, "\n")
+  #     updated_count_hash = handle_blame_lines(lines, 0, count_hash)
+  #     IO.inspect updated_count_hash
+  #   end)
+  #   IO.inspect updated_count_hash
+  # end
+
+  # defp handle_blame_lines(lines, index, dict) do
+  #   if (index == Enum.count(lines) - 1) do
+  #     dict
+  #   else
+  #     line = Enum.at(lines, index)
+  #     date = Enum.at(String.split(line), 3)
+  #     updated_dict = Dict.update(dict, date, 0, fn (val) -> val + 1 end)
+  #     handle_blame_lines(lines, index + 1, updated_dict)
+  #   end
+  # end
 
 
 
