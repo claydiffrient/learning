@@ -22,8 +22,8 @@ defmodule GitAge do
     if (elem(options, 0)[:help]) do
       IO.puts "git_age git_repo_path"
     else
-      [head | tail] = elem(options, 1)
-      open_directory(head) |> git_blame
+      [head | _tail] = elem(options, 1)
+      IO.inspect open_directory(head) |> git_blame
     end
   end
 
@@ -45,7 +45,7 @@ defmodule GitAge do
     File.cd!(path)
     # Get all the files at that path
     response = File.ls!(path)
-    List.flatten(Enum.map(response, fn(x) ->
+    Stream.map(response, fn(x) ->
       full_path = path <> "/" <> x
       # TODO: Figure out some way to handle git ignore stuff
       if (File.dir?(full_path) && x != ".git") do
@@ -53,16 +53,17 @@ defmodule GitAge do
       else
         full_path
       end
-    end))
+    end) |> Enum.to_list |> List.flatten
+
   end
 
   def git_blame(file_list) do
     files = []
-    Enum.map(file_list, fn(x) ->
+    Stream.map(file_list, fn(x) ->
       System.cmd("git", ["blame", x],
         into: files
       )
-    end)
+    end) |> Enum.to_list
   end
 
 
