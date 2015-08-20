@@ -8,6 +8,7 @@ defmodule GitAge.Mixfile do
      escript: [main_module: GitAge],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: Coverex.Task],
      deps: deps]
   end
 
@@ -30,7 +31,8 @@ defmodule GitAge.Mixfile do
   defp deps do
     [
       {:mix_test_watch, "~> 0.1.1", only: :dev},
-      {:timex, "~> 0.17.0"}
+      {:timex, "~> 0.17.0"},
+      {:coverex, "~> 1.4.1", only: :test}
     ]
   end
 end
