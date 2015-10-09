@@ -6,6 +6,9 @@ import Html.Events exposing (onClick)
 
 type alias Model = Int
 
+init : Int -> Model
+init count = count
+
 type Action = Increment | Decrement
 
 update : Action -> Model -> Model
