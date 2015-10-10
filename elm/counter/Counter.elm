@@ -37,3 +37,20 @@ countStyle =
     ("width", "50px"),
     ("text-align", "center")
   ]
+
+type alias Context =
+  {
+    actions : Signal.Address Action,
+    remove : Signal.Address ()
+  }
+
+viewWithRemoveButton : Context -> Model -> Html
+viewWithRemoveButton context model =
+  div []
+    [
+      button [ onClick context.actions Decrement ] [ text "-" ],
+      div [ countStyle ] [ text (toString model) ],
+      button [ onClick context.actions Increment] [ text  "+" ],
+      div [ countStyle ] [],
+      button [ onClick context.remove () ] [ text "X" ]
+    ]
